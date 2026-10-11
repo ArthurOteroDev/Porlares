@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>POLLARIS - Carrinho</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <header>
+    <div class="header-container">
+      <a href="index.html" class="logo"><span class="logo-text">POLLARIS</span></a>
+      <a href="index.html" style="color: var(--brand-teal); text-decoration: none; font-size: 0.85rem; font-weight: 600;">Continuar a Comprar</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <h1 style="font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: #0f172a; margin-bottom: 24px;">Meu Carrinho</h1>
+    
+    <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 24px;">
+      <div class="form-card" style="max-width: 100%; margin: 0;" id="cart-items-container">
+        <!-- Itens carregados via JS -->
+      </div>
+      <div class="form-card" style="max-width: 100%; margin: 0; height: fit-content;">
+        <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; border-bottom: 1px solid var(--border-color); padding-bottom: 12px; margin-bottom: 16px;">Resumo da Compra</h3>
+        <div style="display: flex; justify-content: space-between; font-size: 0.95rem; margin-bottom: 20px;">
+          <span style="color: #64748b;">Subtotal</span>
+          <span id="cart-subtotal" style="font-weight: 700; color: #0f172a;">R$ 0,00</span>
+        </div>
+        <button id="checkout-btn" class="btn-submit" style="background-color: var(--brand-teal); color: var(--brand-navy);">Finalizar Pedido</button>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2026 POLLARIS Marketplace[cite: 1].</p>
+  </footer>
+
+  <script type="module" src="js/carrinho.js"></script>
+  <script>lucide.createIcons();</script>
+</body>
+</html>

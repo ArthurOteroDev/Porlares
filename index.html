@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>POLLARIS Marketplace - Início</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <header>
+    <div class="header-container">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+        </div>
+        <span class="logo-text">POLLARIS</span>
+      </a>
+      
+      <div class="search-box">
+        <input type="text" id="search-input" placeholder="Buscar produtos, marcas e categorias..."/>
+        <button type="button" id="search-btn">
+          <i data-lucide="search" style="width: 16px; height: 16px;"></i>
+        </button>
+      </div>
+
+      <div class="header-actions">
+        <a href="produtos.html" class="btn-vender">
+          <i data-lucide="plus" style="width: 16px; height: 16px;"></i>
+          <span>Vender</span>
+        </a>
+        <a href="login.html" class="nav-link">
+          <i data-lucide="user" style="width: 16px; height: 16px;"></i>
+          <span id="user-display-name">Entrar</span>
+        </a>
+        <a href="carrinho.html" class="nav-link">
+          <i data-lucide="shopping-cart" style="width: 18px; height: 18px; color: var(--brand-teal);"></i>
+          <span id="cart-counter-badge" class="badge" style="display: none;">0</span>
+          <span>Carrinho</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="hero-banner">
+      <div style="max-width: 500px;">
+        <span style="display: inline-block; padding: 4px 12px; background: rgba(0,201,167,0.2); color: var(--brand-teal); border-radius: 20px; font-size: 0.75rem; font-weight: 600; margin-bottom: 12px;">Destaque do Mês</span>
+        <h1 class="hero-title">As Melhores <span>Ofertas</span> do Dia</h1>
+        <p style="color: #cbd5e1; font-size: 0.95rem; line-height: 1.5;">Milhares de produtos selecionados com entrega rápida e garantia garantida.</p>
+      </div>
+    </div>
+
+    <div>
+      <h2 class="section-title">Produtos em Destaque</h2>
+      <div id="products-grid" class="products-grid">
+        <!-- Carregado dinamicamente via JS -->
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2026 POLLARIS Marketplace. Todos os direitos reservados[cite: 1].</p>
+  </footer>
+
+  <script type="module" src="js/main.js"></script>
+  <script>lucide.createIcons();</script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>POLLARIS - Cadastro</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body style="justify-content: center; align-items: center;">
+  <div class="form-card" style="width: 100%;">
+    <div style="text-align: center; margin-bottom: 24px;">
+      <h2 style="font-family: 'Playfair Display', serif; font-size: 1.75rem; font-weight: 700; color: #0f172a; margin-bottom: 6px;">Criar Conta POLLARIS</h2>
+      <p style="color: #64748b; font-size: 0.85rem;">Registe-se para comprar e vender no marketplace</p>
+    </div>
+
+    <form id="register-form">
+      <div class="form-group">
+        <label>Nome Completo</label>
+        <input type="text" id="reg-name" required placeholder="O seu nome"/>
+      </div>
+      <div class="form-group">
+        <label>E-mail</label>
+        <input type="email" id="reg-email" required placeholder="seu@email.com"/>
+      </div>
+      <div class="form-group">
+        <label>Senha</label>
+        <input type="password" id="reg-password" required placeholder="••••••••"/>
+      </div>
+      <button type="submit" class="btn-submit" style="margin-top: 8px;">Criar Minha Conta</button>
+    </form>
+
+    <p style="text-align: center; font-size: 0.85rem; color: #64748b; margin-top: 20px;">
+      Já tem uma conta? <a href="login.html" style="color: var(--brand-teal); font-weight: 600; text-decoration: none;">Entrar</a>
+    </p>
+  </div>
+
+  <script src="js/auth.js"></script>
+</body>
+</html>
