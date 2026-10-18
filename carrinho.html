@@ -3,41 +3,101 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>POLLARIS - Carrinho</title>
+  <title>PorLares — Carrinho de Compras</title>
+  <meta name="description" content="Seu carrinho de compras no PorLares. Negocie itens agrupados por vendedor diretamente pelo WhatsApp.">
   <link rel="stylesheet" href="css/style.css">
   <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
+  <!-- Cabeçalho -->
   <header>
     <div class="header-container">
-      <a href="index.html" class="logo"><span class="logo-text">POLLARIS</span></a>
-      <a href="index.html" style="color: var(--brand-teal); text-decoration: none; font-size: 0.85rem; font-weight: 600;">Continuar a Comprar</a>
+      <a href="index.html" class="logo">
+        <div class="logo-icon">
+          <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+            <polyline points="2 17 12 22 22 17"></polyline>
+            <polyline points="2 12 12 17 22 12"></polyline>
+          </svg>
+        </div>
+        <div>
+          <span class="logo-text">PorLares</span>
+          <span class="logo-tagline">Marketplace</span>
+        </div>
+      </a>
+
+      <div class="header-actions">
+        <a href="index.html" class="nav-link">
+          <i data-lucide="arrow-left" style="width: 16px; height: 16px;"></i>
+          <span>Continuar Comprando</span>
+        </a>
+        <div id="user-nav-actions" style="display: flex; align-items: center; gap: 8px;"></div>
+      </div>
     </div>
   </header>
 
+  <!-- Conteúdo Principal -->
   <main class="container">
-    <h1 style="font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: #0f172a; margin-bottom: 24px;">Meu Carrinho</h1>
-    
-    <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 24px;">
-      <div class="form-card" style="max-width: 100%; margin: 0;" id="cart-items-container">
-        <!-- Itens carregados via JS -->
+    <div class="section-header" style="margin-bottom: 24px;">
+      <div>
+        <h1 class="section-title">Meu Carrinho de Negociação</h1>
+        <p style="color: var(--text-muted); font-size: 0.95rem; margin-top: 4px;">
+          Seus itens selecionados são organizados por vendedor para facilitar a conversa direta no WhatsApp.
+        </p>
       </div>
-      <div class="form-card" style="max-width: 100%; margin: 0; height: fit-content;">
-        <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; border-bottom: 1px solid var(--border-color); padding-bottom: 12px; margin-bottom: 16px;">Resumo da Compra</h3>
-        <div style="display: flex; justify-content: space-between; font-size: 0.95rem; margin-bottom: 20px;">
-          <span style="color: #64748b;">Subtotal</span>
-          <span id="cart-subtotal" style="font-weight: 700; color: #0f172a;">R$ 0,00</span>
+    </div>
+
+    <!-- Layout do Carrinho -->
+    <div class="cart-layout" id="cart-layout-container">
+      <!-- Coluna da Esquerda: Grupos por Vendedor -->
+      <div id="cart-groups-container">
+        <!-- Renderizado dinamicamente via js/carrinho.js -->
+      </div>
+
+      <!-- Coluna da Direita: Resumo Geral e Ações Globais -->
+      <aside>
+        <div class="cart-summary-card" id="cart-summary-box">
+          <h3 class="cart-summary-title">Resumo do Pedido</h3>
+          
+          <div class="cart-summary-row">
+            <span>Total de Itens</span>
+            <span id="summary-total-items" style="font-weight: 600; color: var(--text-main);">0</span>
+          </div>
+
+          <div class="cart-summary-row">
+            <span>Vendedores Diferentes</span>
+            <span id="summary-total-sellers" style="font-weight: 600; color: var(--text-main);">0</span>
+          </div>
+
+          <div class="cart-summary-row total">
+            <span>Total Estimado</span>
+            <span id="summary-total-price" style="color: var(--brand-teal);">R$ 0,00</span>
+          </div>
+
+          <div style="margin-top: 16px; font-size: 0.8rem; color: var(--text-muted); line-height: 1.4;">
+            <i data-lucide="info" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle; margin-right: 4px;"></i>
+            A negociação de pagamento, entrega ou retirada é combinada individualmente com cada vendedor no WhatsApp.
+          </div>
+
+          <!-- Botão Esvaziar Carrinho -->
+          <button id="btn-clear-cart" class="btn-clear-cart" type="button">
+            <i data-lucide="trash-2" style="width: 16px; height: 16px;"></i>
+            <span>Esvaziar Carrinho</span>
+          </button>
         </div>
-        <button id="checkout-btn" class="btn-submit" style="background-color: var(--brand-teal); color: var(--brand-navy);">Finalizar Pedido</button>
-      </div>
+      </aside>
     </div>
   </main>
 
+  <!-- Rodapé -->
   <footer>
-    <p>© 2026 POLLARIS Marketplace[cite: 1].</p>
+    <div class="footer-bottom">
+      <p>© 2026 PorLares Marketplace. Todos os direitos reservados.</p>
+    </div>
   </footer>
 
+  <!-- Scripts -->
+  <script type="module" src="js/navbar.js"></script>
   <script type="module" src="js/carrinho.js"></script>
-  <script>lucide.createIcons();</script>
 </body>
 </html>

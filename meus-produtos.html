@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PorLares — Meus Produtos</title>
+  <meta name="description" content="Gerencie seus anúncios publicados no PorLares. Alterne entre 'Para venda' e 'Vendido'.">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <!-- Cabeçalho -->
+  <header>
+    <div class="header-container">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">
+          <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+            <polyline points="2 17 12 22 22 17"></polyline>
+            <polyline points="2 12 12 17 22 12"></polyline>
+          </svg>
+        </div>
+        <div>
+          <span class="logo-text">PorLares</span>
+          <span class="logo-tagline">Marketplace</span>
+        </div>
+      </a>
+
+      <div class="header-actions">
+        <a href="produtos.html" class="btn-vender">
+          <i data-lucide="plus-circle" style="width: 18px; height: 18px;"></i>
+          <span>Novo Anúncio</span>
+        </a>
+        <a href="index.html" class="nav-link">
+          <i data-lucide="home" style="width: 16px; height: 16px;"></i>
+          <span>Catálogo</span>
+        </a>
+        <div id="user-nav-actions" style="display: flex; align-items: center; gap: 8px;"></div>
+        <div class="cart-btn-wrapper">
+          <a href="carrinho.html" class="nav-link" title="Meu Carrinho">
+            <i data-lucide="shopping-cart" style="width: 20px; height: 20px; color: var(--brand-teal);"></i>
+            <span class="cart-badge" style="display: none;">0</span>
+            <span>Carrinho</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Conteúdo Principal -->
+  <main class="container">
+    <div class="section-header" style="margin-bottom: 24px;">
+      <div>
+        <h1 class="section-title">Painel do Vendedor</h1>
+        <p style="color: var(--text-muted); font-size: 0.95rem; margin-top: 4px;">Gerencie seus anúncios publicados, acompanhe o status de venda e atualize seus itens.</p>
+      </div>
+      <a href="produtos.html" class="btn-vender">
+        <i data-lucide="plus" style="width: 18px; height: 18px;"></i>
+        <span>Publicar Outro Produto</span>
+      </a>
+    </div>
+
+    <!-- Estatísticas dos Meus Produtos -->
+    <div class="vendor-stats-grid">
+      <div class="stat-card">
+        <div class="stat-label">Total de Anúncios</div>
+        <div class="stat-value" id="stat-total">0</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Para Venda (Ativos)</div>
+        <div class="stat-value" id="stat-active" style="color: var(--brand-teal);">0</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Itens Vendidos</div>
+        <div class="stat-value" id="stat-sold" style="color: #64748B;">0</div>
+      </div>
+    </div>
+
+    <!-- Tabela / Lista de Anúncios do Usuário -->
+    <div class="my-products-table-card">
+      <!-- Abas de Filtro -->
+      <div class="filter-tabs">
+        <button class="tab-btn active" data-filter="all">Todos os Anúncios</button>
+        <button class="tab-btn" data-filter="active">Para Venda</button>
+        <button class="tab-btn" data-filter="sold">Vendidos</button>
+      </div>
+
+      <!-- Container dos Itens -->
+      <div id="my-products-container">
+        <div style="text-align: center; padding: 48px; color: var(--text-muted);">
+          Carregando seus anúncios...
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Rodapé -->
+  <footer>
+    <div class="footer-bottom">
+      <p>© 2026 PorLares Marketplace. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script type="module" src="js/navbar.js"></script>
+  <script type="module" src="js/meus-produtos.js"></script>
+</body>
+</html>

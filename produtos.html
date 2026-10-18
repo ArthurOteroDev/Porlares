@@ -3,64 +3,149 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>POLLARIS - Anunciar Produto</title>
+  <title>PorLares — Anunciar Produto</title>
+  <meta name="description" content="Publique seu anúncio de móveis, decoração ou eletrodomésticos no PorLares e negocie direto no WhatsApp.">
   <link rel="stylesheet" href="css/style.css">
   <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
+  <!-- Cabeçalho -->
   <header>
     <div class="header-container">
-      <a href="index.html" class="logo"><span class="logo-text">POLLARIS</span></a>
-      <a href="index.html" style="color: var(--brand-teal); text-decoration: none; font-size: 0.85rem; font-weight: 600;">Voltar ao Início</a>
+      <a href="index.html" class="logo">
+        <div class="logo-icon">
+          <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+            <polyline points="2 17 12 22 22 17"></polyline>
+            <polyline points="2 12 12 17 22 12"></polyline>
+          </svg>
+        </div>
+        <div>
+          <span class="logo-text">PorLares</span>
+          <span class="logo-tagline">Marketplace</span>
+        </div>
+      </a>
+
+      <div class="header-actions">
+        <a href="index.html" class="nav-link">
+          <i data-lucide="arrow-left" style="width: 16px; height: 16px;"></i>
+          <span>Voltar ao Início</span>
+        </a>
+        <div id="user-nav-actions" style="display: flex; align-items: center; gap: 8px;"></div>
+      </div>
     </div>
   </header>
 
-  <main class="container" style="max-width: 700px;">
-    <div style="margin-bottom: 24px;">
-      <h1 style="font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: #0f172a;">Anunciar Produto</h1>
-      <p style="color: #64748b; font-size: 0.9rem;">Preencha os dados abaixo para publicar o seu item no marketplace[cite: 1].</p>
+  <!-- Conteúdo Principal -->
+  <main class="container" style="max-width: 760px;">
+    <!-- Alerta de Autenticação Necessária (se deslogado) -->
+    <div id="auth-required-banner" class="alert-box alert-info" style="display: none;">
+      <strong>Atenção:</strong> Você precisa estar conectado à sua conta para publicar um anúncio no PorLares.
+      <div style="margin-top: 10px;">
+        <a href="login.html?redirect=produtos.html" class="btn-submit" style="display: inline-flex; width: auto; padding: 8px 18px; font-size: 0.85rem;">Fazer Login Agora</a>
+      </div>
     </div>
 
-    <form id="form-anunciar" class="form-card" style="max-width: 100%;">
-      <div class="form-group">
-        <label>Nome do produto *</label>
-        <input type="text" id="prod-name" required placeholder="Ex: Smartphone Samsung Galaxy"/>
+    <div class="form-card" style="max-width: 100%; margin: 20px auto;">
+      <div class="form-header">
+        <h1 class="form-title">Anunciar no PorLares</h1>
+        <p class="form-subtitle">Preencha os detalhes do produto e suas fotos. Os interessados entrarão em contato diretamente pelo seu WhatsApp!</p>
       </div>
-      
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+
+      <div id="publish-error-box" class="alert-box alert-danger" style="display: none;"></div>
+      <div id="publish-success-box" class="alert-box alert-success" style="display: none;"></div>
+
+      <form id="form-anunciar">
+        <!-- Nome do Produto -->
         <div class="form-group">
-          <label>Categoria *</label>
-          <select id="prod-cat" required>
-            <option value="Eletrônicos">Eletrônicos</option>
-            <option value="Moda">Moda</option>
-            <option value="Casa & Jardim">Casa & Jardim</option>
-            <option value="Esportes">Esportes</option>
-          </select>
+          <label for="prod-name">Título do Anúncio <span class="required">*</span></label>
+          <input type="text" id="prod-name" required placeholder="Ex: Sofá Retrátil 3 Lugares Veludo Bege"/>
+          <small class="field-hint">Seja claro e inclua detalhes como modelo, cor ou marca.</small>
         </div>
+
+        <!-- Categoria e Preço -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+          <div class="form-group">
+            <label for="prod-cat">Categoria <span class="required">*</span></label>
+            <select id="prod-cat" required>
+              <option value="" disabled selected>Selecione uma categoria...</option>
+              <option value="Móveis">Móveis</option>
+              <option value="Decoração">Decoração</option>
+              <option value="Eletrodomésticos">Eletrodomésticos</option>
+              <option value="Eletrônicos para o lar">Eletrônicos para o lar</option>
+              <option value="Cozinha e utensílios">Cozinha e utensílios</option>
+              <option value="Quarto e cama">Quarto e cama</option>
+              <option value="Banheiro">Banheiro</option>
+              <option value="Jardim e área externa">Jardim e área externa</option>
+              <option value="Organização">Organização</option>
+              <option value="Reforma e construção">Reforma e construção</option>
+              <option value="Imóveis">Imóveis</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="prod-price">Preço de Venda (R$) <span class="required">*</span></label>
+            <input type="number" step="0.01" min="0" id="prod-price" required placeholder="Ex: 450.00"/>
+            <small class="field-hint">Informe o valor em reais.</small>
+          </div>
+        </div>
+
+        <!-- WhatsApp e Quantidade -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+          <div class="form-group">
+            <label for="prod-whatsapp">WhatsApp para Negociação <span class="required">*</span></label>
+            <input type="tel" id="prod-whatsapp" required placeholder="(11) 99999-9999"/>
+            <small class="field-hint">Número com DDD onde os compradores vão te chamar.</small>
+          </div>
+
+          <div class="form-group">
+            <label for="prod-stock">Quantidade / Estoque</label>
+            <input type="number" min="1" id="prod-stock" value="1"/>
+            <small class="field-hint">Normalmente 1 para itens usados/únicos.</small>
+          </div>
+        </div>
+
+        <!-- Upload de Fotos -->
         <div class="form-group">
-          <label>Preço (R$) *</label>
-          <input type="number" step="0.01" id="prod-price" required placeholder="0,00"/>
+          <label>Fotos do Produto <span class="required">*</span></label>
+          <div class="upload-dropzone" id="upload-zone">
+            <input type="file" id="prod-images-input" accept="image/png, image/jpeg, image/webp" multiple>
+            <div class="upload-icon">
+              <i data-lucide="image-plus" style="width: 44px; height: 44px;"></i>
+            </div>
+            <div class="upload-text-main">Clique ou arraste as fotos do produto aqui</div>
+            <div class="upload-text-sub">Selecione uma ou mais fotos do seu computador (JPG, PNG, WebP — até 5MB cada)</div>
+          </div>
+          
+          <!-- Pré-visualização das Imagens Selecionadas -->
+          <div id="image-previews-container" class="image-previews-grid"></div>
         </div>
-      </div>
 
-      <div class="form-group">
-        <label>URL da Imagem *</label>
-        <input type="url" id="prod-img" required placeholder="https://exemplo.com/imagem.jpg"/>
-      </div>
+        <!-- Descrição Completa -->
+        <div class="form-group">
+          <label for="prod-desc">Descrição Completa <span class="required">*</span></label>
+          <textarea id="prod-desc" rows="5" required placeholder="Descreva o estado do item, medidas, tempo de uso, motivo da venda, local de retirada e formas de negociação..."></textarea>
+          <small class="field-hint">Quanto mais detalhes você fornecer, mais rápido fechará a venda!</small>
+        </div>
 
-      <div class="form-group">
-        <label>Descrição *</label>
-        <textarea id="prod-desc" rows="4" required placeholder="Detalhes, estado de conservação e características..."></textarea>
-      </div>
-
-      <button type="submit" class="btn-submit">Publicar Anúncio</button>
-    </form>
+        <!-- Botão de Publicação -->
+        <button type="submit" id="btn-submit-publish" class="btn-submit" style="margin-top: 10px;">
+          <i data-lucide="check-circle" style="width: 18px; height: 18px;"></i>
+          <span>Publicar Anúncio</span>
+        </button>
+      </form>
+    </div>
   </main>
 
+  <!-- Rodapé -->
   <footer>
-    <p>© 2026 POLLARIS Marketplace[cite: 1].</p>
+    <div class="footer-bottom">
+      <p>© 2026 PorLares Marketplace. Todos os direitos reservados.</p>
+    </div>
   </footer>
 
+  <!-- Scripts -->
+  <script type="module" src="js/navbar.js"></script>
   <script type="module" src="js/produtos.js"></script>
 </body>
 </html>
