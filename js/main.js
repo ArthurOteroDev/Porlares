@@ -71,26 +71,59 @@ async function enrichWithImages(products) {
       .select('product_id, image_url')
       .in('product_id', productIds);
 
+    const map = {};
     if (!error && images) {
-      const map = {};
       images.forEach(img => {
         if (!map[img.product_id]) map[img.product_id] = [];
         map[img.product_id].push(img.image_url);
       });
-
-      return products.map(p => ({
-        ...p,
-        images: [p.image_url, ...(map[p.id] || [])].filter(Boolean)
-      }));
     }
+
+    return products.map(p => {
+      let wa = p.whatsapp;
+      if (!wa && p.description) {
+        const match = p.description.match(/\[Contato WhatsApp:\s*(\d+)\]/i);
+        if (match) wa = match[1];
+      }
+
+      let img = p.image_url;
+      if (img && img.includes('1792364359400_0')) {
+        img = img.replace('1792364359400_0', '1792364360083_0');
+      }
+
+      const extra = map[p.id] || [];
+      if (extra.length === 0 && img && img.includes('1792364360083_0')) {
+        extra.push(img.replace('1792364360083_0', '1792364360395_1'));
+      }
+
+      return {
+        ...p,
+        image_url: img,
+        whatsapp: wa || p.whatsapp,
+        images: [img, ...extra].filter(Boolean)
+      };
+    });
   } catch (e) {
     console.warn('Tabela product_images ainda não criada:', e.message);
   }
 
-  return products.map(p => ({
-    ...p,
-    images: [p.image_url].filter(Boolean)
-  }));
+  return products.map(p => {
+    let wa = p.whatsapp;
+    if (!wa && p.description) {
+      const match = p.description.match(/\[Contato WhatsApp:\s*(\d+)\]/i);
+      if (match) wa = match[1];
+    }
+    let img = p.image_url;
+    if (img && img.includes('1792364359400_0')) {
+      img = img.replace('1792364359400_0', '1792364360083_0');
+    }
+    return {
+      ...p,
+      image_url: img,
+      whatsapp: wa || p.whatsapp,
+      images: [img].filter(Boolean)
+    };
+  });
 }
 
 // ---------------------------------------------------------------------
@@ -134,12 +167,12 @@ function renderFilteredProducts() {
     const safeDesc = escapeHtml(p.description || '');
     const safeCat = escapeHtml(p.category || 'Geral');
     const safeImg = p.image_url || 'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?w=500';
-    const isDemo = p.is_demo || !p.user_id;
+    const isDemo = p.is_demo === true;
 
     return `
       <div class="product-card">
         <div class="product-img-wrapper">
-          <img src="${safeImg}" alt="${safeName}" class="product-img" loading="lazy">
+          <img src="${safeImg}" alt="${safeName}" class="product-img" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1513519245088-0e12902e5a38?w=500'">
           <span class="card-badge-top">${safeCat}</span>
           ${isDemo ? '<span class="card-badge-demo" title="Produto de exemplo">Demonstração</span>' : ''}
         </div>

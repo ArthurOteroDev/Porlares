@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   setupLoginForm(redirectTarget);
   setupRegisterForm(redirectTarget);
+  setupPasswordToggles();
 });
 
 // ---------------------------------------------------------------------
@@ -37,7 +38,7 @@ function setupLoginForm(redirectTarget) {
     const passwordInput = document.getElementById('login-password');
     const errorBox = document.getElementById('auth-error-box');
 
-    const email = emailInput.value.trim();
+    const email = emailInput.value.trim().toLowerCase();
     const password = passwordInput.value;
 
     if (!email || !password) {
@@ -92,7 +93,7 @@ function setupRegisterForm(redirectTarget) {
     const phoneInput = document.getElementById('reg-phone');
 
     const name = nameInput.value.trim();
-    const email = emailInput.value.trim();
+    const email = emailInput.value.trim().toLowerCase();
     const password = passwordInput.value;
     const phone = phoneInput ? phoneInput.value.trim() : '';
 
@@ -248,3 +249,26 @@ function escapeHtml(str) {
     "'": '&#039;'
   })[m]);
 }
+
+function setupPasswordToggles() {
+  const toggles = [
+    { btnId: 'toggle-login-password', inputId: 'login-password' },
+    { btnId: 'toggle-reg-password', inputId: 'reg-password' }
+  ];
+
+  toggles.forEach(({ btnId, inputId }) => {
+    const btn = document.getElementById(btnId);
+    const input = document.getElementById(inputId);
+    if (!btn || !input) return;
+
+    btn.addEventListener('click', () => {
+      const isPassword = input.type === 'password';
+      input.type = isPassword ? 'text' : 'password';
+      btn.innerHTML = isPassword 
+        ? '<i data-lucide="eye-off" style="width: 18px; height: 18px;"></i>' 
+        : '<i data-lucide="eye" style="width: 18px; height: 18px;"></i>';
+      if (window.lucide) window.lucide.createIcons();
+    });
+  });
+}
+

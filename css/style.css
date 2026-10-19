@@ -962,6 +962,38 @@ header {
   margin-top: 6px;
 }
 
+.password-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.password-input-wrapper input {
+  padding-right: 46px !important;
+}
+
+.password-toggle-btn {
+  position: absolute;
+  right: 12px;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  border-radius: 6px;
+  transition: color 0.2s, background-color 0.2s;
+  z-index: 2;
+}
+
+.password-toggle-btn:hover {
+  color: var(--brand-navy);
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
 .btn-submit {
   width: 100%;
   background: var(--brand-navy);
